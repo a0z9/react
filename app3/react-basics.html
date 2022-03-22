@@ -20,15 +20,49 @@
 <div id="div1"></div>
 <hr/>
 <div id="div2"></div>
-
+<hr/>
+<div id="div3"></div>
+<hr/>
+<div id="div4"></div>
 
 <script type="text/javascript">
+
+class Com1 extends React.Component
+{
+    render(){
+    const t1 = React.createElement("li",null,'Books');
+    const t2 = React.createElement("li",null,'Papers');
+    ///...
+
+    return  React.createElement("ul",null, t1, t2);
+
+    }
+}
 
 const re1= React.createElement("h2",null, "React works!! Реакт работает!");
 const re2= React.createElement("div", {id:"data1", className: "section"}, "Reacting fast!! Реакт работает!");
 
 ReactDOM.render(re1, document.querySelector('#div1'));
 ReactDOM.render(re2, document.querySelector('#div2'))
+ReactDOM.render( React.createElement(Com1,null), document.querySelector('#div3'))
+
+</script>
+
+<!--JSX-->
+<script type="text/babel">
+
+    class Com2 extends React.Component
+    {
+        render(){
+            return <ul>
+                <li>Books</li>
+                <li>Papers</li>
+                <li>Journals</li>
+            </ul> ;
+           }
+    }
+
+ReactDOM.render( <Com2/>, document.querySelector('#div4'))
 
 </script>
 
