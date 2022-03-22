@@ -24,6 +24,8 @@
 <div id="div3"></div>
 <hr/>
 <div id="div4"></div>
+<hr/>
+<div id="div5"></div>
 
 <script type="text/javascript">
 
@@ -46,23 +48,48 @@ ReactDOM.render(re1, document.querySelector('#div1'));
 ReactDOM.render(re2, document.querySelector('#div2'))
 ReactDOM.render( React.createElement(Com1,null), document.querySelector('#div3'))
 
+let cats =['Books','Papers','Journals','Карандаши','Ластики'];
+
+class Cats extends React.Component
+{
+    render(){
+        let re1 = React.createElement('h2', null, this.props.title);
+
+        let cat_list = cats.map( (val,k) =>
+        React.createElement('li', {key: k}, val));
+
+        return  React.createElement('ol', null, cat_list.reverse());
+    }
+}
+
+
 </script>
 
 <!--JSX-->
 <script type="text/babel">
 
+
+
     class Com2 extends React.Component
     {
         render(){
-            return <ul>
+            return (
+            <React.Fragment>
+            <h2>{this.props.title}</h2>
+            <ul>
                 <li>Books</li>
                 <li>Papers</li>
                 <li>Journals</li>
-            </ul> ;
+            </ul>
+            </React.Fragment>);
            }
     }
 
-ReactDOM.render( <Com2/>, document.querySelector('#div4'))
+
+
+ReactDOM.render( <Com2 title="Категории товаров"/>, document.querySelector('#div4'))
+ReactDOM.render( <Cats/>, document.querySelector('#div5'))
+
 
 </script>
 
