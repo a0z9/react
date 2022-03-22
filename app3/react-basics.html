@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React Basics</title>
+<!--    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>-->
+<!--    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>-->
+<!--    <script crossorigin src="https://unpkg.com/browse/babel-standalone@6.26.0/babel.min.js"></script>-->
+
+    <script src="src/babel.min.js"></script>
+    <script src="src/react.development.js"></script>
+    <script src="src/react-dom.development.js"></script>
+    <link rel="stylesheet" href="css/base.css">
+
+
+</head>
+<body>
+
+<h1>REACT DAY1</h1>
+<div id="div1"></div>
+<hr/>
+<div id="div2"></div>
+
+
+<script type="text/javascript">
+
+const re1= React.createElement("h2",null, "React works!! Реакт работает!");
+const re2= React.createElement("div", {id:"data1", className: "section"}, "Reacting fast!! Реакт работает!");
+
+ReactDOM.render(re1, document.querySelector('#div1'));
+ReactDOM.render(re2, document.querySelector('#div2'))
+
+</script>
+
+
+
+</body>
+</html>
