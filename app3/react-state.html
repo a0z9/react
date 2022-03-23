@@ -21,12 +21,28 @@
 <hr/>
 <div id="data1"></div>
 <hr/>
-<div id="data2></div>
+<div id="data2"></div>
 <hr/>
 <div id="btn1"></div>
 
 <!--JSX-->
 <script type="text/babel">
+
+
+
+class BtnGroup extends React.Component {
+    btnHandler(){
+        console.log('clicked!');
+    }
+
+    render() {
+        return (
+            <button onClick={this.btnHandler}> Press here </button>
+        );
+    }
+}
+
+
 
 class Ticks extends React.Component
 {
@@ -54,6 +70,12 @@ class Ticks extends React.Component
         console.log('+ DidMount fired');
     }
 
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+      console.log(prevState);
+    }
+
+
     render(){
         console.log('+ render +');
         return (
@@ -70,6 +92,7 @@ class Ticks extends React.Component
 }
 
 ReactDOM.render(<Ticks title="Day2 React learning"/>, document.querySelector("#div1"));
+ReactDOM.render(<BtnGroup />, document.querySelector("#btn1"));
 
 </script>
 
