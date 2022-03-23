@@ -1,6 +1,10 @@
-.section
-{background: burlywood;
+.section {
+ background: burlywood;
  font-size: 22px;
  font-style: italic;
-
 }
+ .style1 {
+ font-size: 25px;
+  /*text-decoration: underline;*/
+ }
+

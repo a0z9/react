@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React Basics</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+
+<!--    <script src="src/babel.min.js"></script>-->
+<!--    <script src="src/react.development.js"></script>-->
+<!--    <script src="src/react-dom.development.js"></script>-->
+    <link rel="stylesheet" href="css/base.css">
+
+
+</head>
+<body>
+
+<h1>REACT DAY2</h1>
+<div id="div1"></div>
+<hr/>
+<div id="data1"></div>
+<hr/>
+<div id="data2"></div>
+<hr/>
+<div id="btn1"></div>
+
+<!--JSX-->
+<script type="text/babel">
+
+
+function  btnHandler(){
+    console.log('clicked!');
+}
+
+
+function BtnGroup(props) {
+     const btnStyle = {color: props.color, border: "solid", textDecoration: "underline"};
+
+     return (
+         <button onClick={btnHandler} style={btnStyle} className="style1"> Press here </button>
+         );
+
+   // var a = <button onClick={btnHandler} style={{color: "red", border: "solid"}}> Press here </button>;
+
+}
+
+ReactDOM.render(<BtnGroup color="green"/>, document.querySelector("#btn1"));
+
+</script>
+
+
+
+</body>
+</html>
