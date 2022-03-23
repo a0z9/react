@@ -45,16 +45,17 @@ class Ticks extends React.Component
     }
 
     ticker2(){
-        this.setState({number2: this.state.number2 + Math.ceil(Math.random()*20)});
+        this.setState({number2: this.state.number2 + Math.ceil(Math.random()*25)});
     }
 
     componentDidMount() {
-        setInterval(this.ticker1,1000);
-        setInterval(this.ticker2,200);
+        setInterval(this.ticker1,2000);
+     //   setInterval(this.ticker2,500);
         console.log('+ DidMount fired');
     }
 
     render(){
+        console.log('+ render +');
         return (
           <React.Fragment>
               <h1> {this.props.title} </h1>
