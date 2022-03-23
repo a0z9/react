@@ -29,16 +29,39 @@
 <script type="text/babel">
 
 
-function  btnHandler(){
-    console.log('clicked!');
+//function  btnHandler(){
+//    console.log('clicked!');
+//}
+
+
+function Par(props)
+{
+    return <p>{props.text}</p>;
 }
 
-
 function BtnGroup(props) {
-     const btnStyle = {color: props.color, border: "solid", textDecoration: "underline"};
+   // let [st, setButtonState] = React.useState(1000);
+    let [st, setButtonState] = React.useState({a:1,b:1});
+
+    function  btnHandler(){
+        console.log('clicked!');
+     //   setButtonState(st+1);
+        setButtonState({a:st.a+1,b:st.b+10});
+    }
+
+    const btnStyle = {color: props.color, border: "solid", textDecoration: "underline"};
+
+
+   //  let [st, setButtonState] = React.useState({data:'My stae', a: 1122});
+
+     console.log(st);
+
 
      return (
+         <div>
          <button onClick={btnHandler} style={btnStyle} className="style1"> Press here </button>
+         <Par text={"Number data: " + st.a}/>
+         </div>
          );
 
    // var a = <button onClick={btnHandler} style={{color: "red", border: "solid"}}> Press here </button>;
