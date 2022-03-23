@@ -8,3 +8,11 @@
   /*text-decoration: underline;*/
  }
 
+ .books
+ {
+  width: 80%;
+  font-size: 25px;
+  border: 1px solid;
+  text-align-all: left;
+ }
+

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React Basics</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+
+    <link rel="stylesheet" href="css/base.css">
+
+</head>
+<body>
+
+<h1>REACT DAY2. Library test.</h1>
+<div id="books"></div>
+<hr/>
+<div id="btn1"></div>
+
+<!--JSX-->
+<script type="text/babel">
+
+function Btn(props) {
+    let [st, setButtonState] = React.useState({a:1,b:1, c:'data!', books:[]});
+
+    function getBooks(){
+     //  let res ={};
+       fetch("http://localhost:8080/api/books")
+        .then( (resp) => resp.json() )
+        .then( (data) => {
+            console.log(data);
+           // res = {...data};
+            setButtonState( st => {  st.books = data; return {...st}; });
+            //....
+        });
+
+
+    }
+
+
+    React.useEffect(() =>
+        {
+            console.log('++ use Effect');
+            console.log(st);
+        }
+    );
+
+    function  btnHandler(){
+        console.log('clicked!');
+        getBooks();
+
+        setButtonState( st => {  st.a = st.a +1; return {...st}; });
+    }
+
+    const btnStyle = {color: props.color, border: "solid"};
+
+
+     console.log(st);
+
+
+     return (
+         <div>
+         <button onClick={btnHandler} style={btnStyle} className="style1"> Get books </button>
+         <Books books={st.books}/>
+         </div>
+         );
+
+}
+
+function Books(props){
+
+    const rows = props.books.map(
+        (data) =>
+        {
+            return <tr>
+                <td>{data.id}</td>
+                <td>{data.author}</td>
+                <td>{data.title}</td>
+            </tr>
+         }
+    )
+
+ return <div>
+ <table class="books">
+     <thead>
+       <tr>
+         <th>Id</th> <th>Author</th> <th>Title</th>
+       </tr>
+     </thead>
+     <tbody>
+     {rows}
+     </tbody>
+ </table>
+ </div>
+
+}
+
+
+ReactDOM.render(<Btn color="green"/>, document.querySelector("#btn1"));
+
+</script>
+
+
+
+
+</body>
+</html>
