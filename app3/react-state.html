@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React Basics</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+
+<!--    <script src="src/babel.min.js"></script>-->
+<!--    <script src="src/react.development.js"></script>-->
+<!--    <script src="src/react-dom.development.js"></script>-->
+    <link rel="stylesheet" href="css/base.css">
+
+
+</head>
+<body>
+
+<h1>REACT DAY2</h1>
+<div id="div1"></div>
+<hr/>
+<div id="data1"></div>
+<hr/>
+<div id="data2></div>
+<hr/>
+<div id="btn1"></div>
+
+<!--JSX-->
+<script type="text/babel">
+
+class Ticks extends React.Component
+{
+
+    constructor(props) {
+        super(props);
+        this.state = {number1: 10, arr2: [1,2,3], number2: 1};
+        console.log('+++ ctor Ticks');
+        this.ticker1 = this.ticker1.bind(this);
+        this.ticker2 = this.ticker2.bind(this);
+
+    }
+
+    ticker1(){
+        this.setState({number1: this.state.number1 + Math.ceil(Math.random()*100)});
+    }
+
+    ticker2(){
+        this.setState({number2: this.state.number2 + Math.ceil(Math.random()*20)});
+    }
+
+    componentDidMount() {
+        setInterval(this.ticker1,1000);
+        setInterval(this.ticker2,200);
+        console.log('+ DidMount fired');
+    }
+
+    render(){
+        return (
+          <React.Fragment>
+              <h1> {this.props.title} </h1>
+              <h2> Number1: {this.state.number1} </h2>
+              <h2> Number2: {this.state.number2} </h2>
+
+          </React.Fragment>
+        );
+
+    }
+
+}
+
+ReactDOM.render(<Ticks title="Day2 React learning"/>, document.querySelector("#div1"));
+
+</script>
+
+
+
+</body>
+</html>
