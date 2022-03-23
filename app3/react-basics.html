@@ -55,10 +55,11 @@ class Cats extends React.Component
     render(){
         let re1 = React.createElement('h2', null, this.props.title);
 
-        let cat_list = cats.map( (val,k) =>
+        let cat_list = this.props.cats.map( (val,k) =>
         React.createElement('li', {key: k}, val));
 
-        return  React.createElement('ol', null, cat_list.reverse());
+        return
+        React.createElement('ol', null, cat_list.reverse());
     }
 }
 
@@ -68,6 +69,21 @@ class Cats extends React.Component
 <!--JSX-->
 <script type="text/babel">
 
+    class Cats2 extends React.Component
+    {
+        render(){
+
+            let cat_list = this.props.cats.map( (val,k) =>
+                React.createElement('li', {key: k}, val));
+
+            return (
+                <div>
+                    <h2> {this.props.title} </h2>
+                    <ol> {cat_list.reverse()} </ol>
+                </div>
+                   );
+                 }
+    }
 
 
     class Com2 extends React.Component
@@ -86,9 +102,8 @@ class Cats extends React.Component
     }
 
 
-
 ReactDOM.render( <Com2 title="Категории товаров"/>, document.querySelector('#div4'))
-ReactDOM.render( <Cats/>, document.querySelector('#div5'))
+ReactDOM.render( <Cats2 cats={[...cats,'Точилки']} title="Categories:"/>, document.querySelector('#div5'))
 
 
 </script>
