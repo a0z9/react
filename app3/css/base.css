@@ -2,9 +2,15 @@
  background: burlywood;
  font-size: 22px;
  font-style: italic;
+ padding: 5px;
+
 }
  .style1 {
  font-size: 25px;
+ padding: 5px;
+  margin: 5px;
+
+
   /*text-decoration: underline;*/
  }
 
@@ -13,6 +19,17 @@
   width: 80%;
   font-size: 25px;
   border: 1px solid;
-  text-align-all: left;
+  text-align: left;
+  padding: 5px;
+  margin: 5px;
  }
 
+ .books tbody tr:nth-child(2n+1)
+ {
+  background: lightyellow;
+ }
+
+/*th*/
+/*{*/
+/* text-align: left;*/
+/*}*/
