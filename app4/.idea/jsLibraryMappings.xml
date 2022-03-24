@@ -2,6 +2,6 @@
 <project version="4">
   <component name="JavaScriptLibraryMappings">
     <file url="file://$PROJECT_DIR$" libraries="{app4/node_modules}" />
-    <file url="PROJECT" libraries="{app4/node_modules}" />
+    <file url="PROJECT" libraries="{@types/react-redux, app4/node_modules}" />
   </component>
 </project>
