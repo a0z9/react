@@ -11,17 +11,21 @@ var mdb_host = process.env.MDB_HOST;
 var mdb_user = process.env.MDB_USER;
 var mdb_pass = process.env.MDB_PASS;
 var mdb_dbas = process.env.MDB_dbas;
+var mdb_port = process.env.MDB_PORT;
 
+//if(typeof mdb_host === 'undefined' || mdb_host === null ) mdb_host="127.0.0.1";
 if(typeof mdb_host === 'undefined' || mdb_host === null ) mdb_host="127.0.0.1";
 if(typeof mdb_user === 'undefined' || mdb_user === null ) mdb_user="root";
 if(typeof mdb_pass === 'undefined' || mdb_pass === null ) mdb_pass="password";
 if(typeof mdb_dbas === 'undefined' || mdb_dbas === null ) mdb_dbas="library";
+if(typeof mdb_port === 'undefined' || mdb_port === null ) mdb_port="3306";
 
 const pool = mariadb.createPool({
   host: mdb_host, 
   user: mdb_user, 
   password: mdb_pass,
-  database: mdb_dbas
+  database: mdb_dbas,
+  port: mdb_port
 });
 
 var getConnection = function(){
