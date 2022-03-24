@@ -17,6 +17,7 @@
 <div id="div1"></div>
 <div id="div2"></div>
 <div id="div3"></div>
+<hr/>
 <div id="counter"></div>
 <div id="div4"></div>
 
@@ -58,7 +59,7 @@ class Counter extends React.Component
 }
 
 
-class ButtonCounter extends React.Component
+class Button extends React.Component
 {
     constructor(props) {
         super(props);
@@ -70,6 +71,7 @@ class ButtonCounter extends React.Component
     clickHandler(){
         this.setState( state => ({counter: state.counter+1}) );
         log(this.props);
+        this.props.dispatchStore(this.props.type);
     }
 
     render(){
@@ -84,8 +86,32 @@ class ButtonCounter extends React.Component
 
 
 ReactDOM.render(<Counter />, document.getElementById('counter'));
-ReactDOM.render(<ButtonCounter color="black"/>, document.getElementById('div4') );
+ReactDOM.render(<Button color="black"/>, document.getElementById('div4') );
 
+
+function mapState2Props(gstate) {
+    return {counter: gstate.counter};
+}
+
+function mapDispatch2Props(dispatch) {
+    return  {dispatchStore: (data) => dispatch({type:data})}
+}
+
+const GlobalCounter = ReactRedux.connect(mapState2Props)(Counter);
+const ButtonCounter = ReactRedux.connect(null,mapDispatch2Props)(Button);
+
+const Provider = ReactRedux.Provider;
+
+ReactDOM.render(
+    <div>
+        <Provider store={store}>
+         <GlobalCounter />
+         <ButtonCounter color="blue" type="RESET"/>
+         <ButtonCounter color="green" type="MINUS"/>
+         <ButtonCounter color="red" type="PLUS"/>
+        </Provider>
+    </div>, document.getElementById('div3')
+);
 
 </script>
 

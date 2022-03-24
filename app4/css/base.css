@@ -29,6 +29,13 @@
   background: lightyellow;
  }
 
+ button {
+  font-size: 23px;
+  padding: 5px;
+  margin: 5px;
+ }
+
+
 /*th*/
 /*{*/
 /* text-align: left;*/
