@@ -71,7 +71,7 @@ class Button extends React.Component
     clickHandler(){
         this.setState( state => ({counter: state.counter+1}) );
         log(this.props);
-        this.props.dispatchStore(this.props.type);
+        if(typeof this.props.dispatchStore !== "undefined") this.props.dispatchStore(this.props.type);
     }
 
     render(){
@@ -94,7 +94,7 @@ function mapState2Props(gstate) {
 }
 
 function mapDispatch2Props(dispatch) {
-    return  {dispatchStore: (data) => dispatch({type:data})}
+    return  {dispatchStore: (data1) => dispatch({type:data1})}
 }
 
 const GlobalCounter = ReactRedux.connect(mapState2Props)(Counter);
