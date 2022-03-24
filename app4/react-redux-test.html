@@ -17,6 +17,8 @@
 <div id="div1"></div>
 <div id="div2"></div>
 <div id="div3"></div>
+<div id="counter"></div>
+<div id="div4"></div>
 
 <script>
 const log = console.log;
@@ -25,21 +27,64 @@ log(Redux);
 log('----------------');
 log(ReactRedux);
 
-const reducer = (state, action) =>
+const reducer = (state, action={type:'RESET'}) =>
 {
-    log(`counter: ${state.coonter}, action type: ${action.type}.`);
-    
+    log(`counter: ${state.counter}, action type: ${action.type}.`);
 
+    switch (action.type) {
+        case 'PLUS': return {...state, counter: state.counter + 1}; break;
+        case 'MINUS': return {...state, counter: state.counter - 1}; break;
+        case 'RESET': return {...state, counter: 0}; break;
+        default: return state;
+    }
+};
 
-}
-
-
+const init_state = {counter:0, k1:0, k2:{}};
+const store = Redux.createStore(reducer,init_state);
 
 </script>
 
 
 <script type="text/babel">
 
+class Counter extends React.Component
+{
+    render(){
+        return <div>
+            <h2>State Counter: {this.props.counter}</h2>
+        </div>
+
+    }
+}
+
+
+class ButtonCounter extends React.Component
+{
+    constructor(props) {
+        super(props);
+        this.states = {counter:0};
+        this.clickHandler = this.clickHandler.bind(this);
+
+    }
+
+    clickHandler(){
+        this.setState( state => ({counter: state.counter+1}) );
+        log(this.props);
+    }
+
+    render(){
+        return <div>
+            <button style={{color:this.props.color}} onClick={this.clickHandler}>
+             Counter: {this.state.counter}, type: {this.props.type}
+            </button>
+        </div>
+    }
+
+}
+
+
+ReactDOM.render(<Counter />, document.getElementById('counter'));
+ReactDOM.render(<ButtonCounter color="black"/>, document.getElementById('div4') );
 
 
 </script>
