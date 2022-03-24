@@ -1,0 +1,15 @@
+{
+  "type": "module",
+  "name": "app4",
+  "version": "1.1.2",
+  "description": "Test modules",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "Andrei",
+  "license": "ISC"
+}
