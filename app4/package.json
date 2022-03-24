@@ -11,5 +11,8 @@
     "node"
   ],
   "author": "Andrei",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "redux": "^4.1.2"
+  }
 }
