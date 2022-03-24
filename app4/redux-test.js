@@ -76,3 +76,37 @@ log('state5: ', store.getState());
 
 store.dispatch({type: 'RESET'});
 log('state6: ', store.getState());
+
+//---- producer join
+log('+++++++++++++++++++++++++++++++++++');
+
+const plus = (st=0, ac) =>
+{
+    log(`+ st=${st}, ac.type=${ac.type}`);
+    return st + 1;
+}
+
+
+const plus2 = (st=0, ac) => { return (ac.type === '+'? st+1 : st);}
+
+
+const minus = (st=0, ac) =>
+{
+    log(`- st=${st}, ac.type=${ac.type}`);
+    return (ac.type === '-'? st-1 : st);
+}
+
+const reset = (st=0, ac) =>
+{
+    log(`- st=${st}, ac.type=${ac.type}`);
+    return 0;
+}
+
+const joined = Redux.combineReducers({p:plus2, m:minus, r:reset});
+const storeJoined = Redux.createStore(joined, {p:0,m:0,r:0});
+
+log('joined: state0: ', storeJoined.getState());
+storeJoined.dispatch({type: '-'});
+
+log('joined: state1: ', storeJoined.getState());
+
