@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React Day1 training</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+</head>
+<body>
+
+<div id="div1"></div>
+<div id="div2"></div>
+<div id="div3"></div>
+<hr/>
+<div id="div4"></div>
+<hr/>
+<div id="div5"></div>
+<hr/>
+<div id="div6"></div>
+
+
+<script type="text/babel">
+
+// -------------- dynamic lists -------------
+
+ let cats = ['Book', 'Журналы', 'Papers', 'Microfilms', 'Digitals', 'Manuscripts'];
+
+ const Cats = ({cats,title}) => //JSX component
+    {
+           const catsStyle =
+                {
+                    padding: 10,
+                    margin: 5,
+                    backgroundColor: 'lightgrey',
+                    borderRadius: 20
+                };
+
+            console.log("Render functional component: ", Cats.name);
+            let catList = cats.map( (val,k) =>  React.createElement('li', {key: k}, val) );
+            let root =
+                <div style={catsStyle}>
+                    <h3>{title?title:"Library resources"}</h3>
+                    <ol> {catList} </ol>
+                </div>;
+
+            return root;
+
+    };
+
+    ReactDOM.render(<Cats cats={[...cats, 'Магнитные ленты']} title="Библиотечные ресурсы"/>,document.querySelector("#div1"));
+
+</script>
+
+
+
+</body>
+</html>

@@ -85,7 +85,7 @@ ReactDOM.render(<MyList2 title="Мой новый список"/>,document.query
 
     class Cats extends React.Component //JSX component
     {
-        constructor(props)
+        constructor({cats,title})
         {super();
             this.catsStyle =
                 {
@@ -94,14 +94,15 @@ ReactDOM.render(<MyList2 title="Мой новый список"/>,document.query
                     backgroundColor: 'lightgrey',
                     borderRadius: 10
                 };
-
+            this.cats = cats;
+            this.title= title;
         }
         render(){
             console.log("Render component: ", this.constructor.name);
-            let catList = this.props.cats.map( (val,k) =>  React.createElement('li', {key: k}, val) );
+            let catList = this.cats.map( (val,k) =>  React.createElement('li', {key: k}, val) );
             let root =
                 <div style={this.catsStyle}>
-                    <h3>{this.props.title?this.props.title:"Library resources"}</h3>
+                    <h3>{this.title?this.title:"Library resources"}</h3>
                     <ol> {catList} </ol>
                 </div>;
 
@@ -109,7 +110,7 @@ ReactDOM.render(<MyList2 title="Мой новый список"/>,document.query
         }
     }
 
-    ReactDOM.render(<Cats cats={cats}/>,document.querySelector("#div6"));
+    ReactDOM.render(<Cats cats={[...cats, 'Магнитные ленты']} title="Библиотечные ресурсы"/>,document.querySelector("#div6"));
 
 </script>
 
