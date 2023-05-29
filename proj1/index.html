@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React Day1 training</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+</head>
+<body>
+
+<div id="div1"></div>
+<div id="div2"></div>
+<div id="div3"></div>
+<hr/>
+<div id="div4"></div>
+<hr/>
+<div id="div5"></div>
+<hr/>
+<div id="div6"></div>
+
+
+<script>
+    const el1 = React.createElement("h2",null,"React works!! Реакт работает!!!!");
+    // react 17 and below
+    if( !ReactDOM.createRoot ) {ReactDOM.render(el1,document.querySelector("#div1")); console.log('v.17-');}
+    // react 18
+    else {ReactDOM.createRoot(document.querySelector("#div1")).render(el1); console.log('v.18');}
+
+    const el2 = React.createElement("div", {projectNumber: "12.2", id:"data", className: "data", style: {color:"green", fontSize:"24pt"}},
+        "NEW React works!! Передача параметров");
+    ReactDOM.render(el2, document.getElementById("div2"));
+
+    //-------------
+    const el3 = React.createElement("div", {projectNumber: "12.2", id:"data2", className: "data", style: {color:"lightblue", fontSize:"20pt"}},
+        "NEW React works!! Передача параметров", el2);
+    ReactDOM.render(el3, document.getElementById("div3"));
+
+    //------------ 1st react component
+
+    class MyList extends React.Component
+    {
+        render(){
+            console.log("Render component: ", this.constructor.name);
+
+            const el1 = React.createElement("li",null,'Books');
+            const el2 = React.createElement("li",null,'Letters');
+            const list = React.createElement("ul",null,el1,el2);
+            //if(!this.props.title) this.props.title= "Мой список ресурсов";
+            const header = React.createElement("h3",null,this.props.title?this.props.title:"Мой список ресурсов");
+            //....
+            return React.createElement("div",null,header,list);
+        }
+    }
+
+    ReactDOM.render(React.createElement(MyList, {title: "Список ресурсов"}),document.querySelector("#div4"));
+    //ReactDOM.render(React.createElement(MyList,null),document.querySelector("#div4"));
+</script>
+
+<script type="text/babel">
+
+    class MyList2 extends React.Component //JSX component
+    {
+        render(){
+            console.log("Render component: ", this.constructor.name);
+             let root =
+                 <React.Fragment>
+                 <h3>{this.props.title?this.props.title:"Мой список ресурсов"}</h3>
+                 <ul>
+                     <li> Книги </li>
+                     <li> Письма </li>
+                     <li> Журналы </li>
+                 </ul>
+                </React.Fragment>;
+
+            return root;
+        }
+    }
+
+ReactDOM.render(<MyList2 title="Мой новый список"/>,document.querySelector("#div5"));
+
+// -------------- dynamic lists -------------
+
+ let cats = ['Book', 'Журналы', 'Papers', 'Microfilms', 'Digitals', 'Manuscripts'];
+
+    class Cats extends React.Component //JSX component
+    {
+        render(){
+            console.log("Render component: ", this.constructor.name);
+            let catList = this.props.cats.map( (val,k) =>  React.createElement('li', {key: k}, val) );
+            let root =
+                <React.Fragment>
+                    <h3>{this.props.title?this.props.title:"Library resources"}</h3>
+                    <ol> {catList} </ol>
+                </React.Fragment>;
+
+            return root;
+        }
+    }
+
+    ReactDOM.render(<Cats cats={cats}/>,document.querySelector("#div6"));
+
+</script>
+
+
+
+</body>
+</html>
