@@ -85,14 +85,25 @@ ReactDOM.render(<MyList2 title="Мой новый список"/>,document.query
 
     class Cats extends React.Component //JSX component
     {
+        constructor(props)
+        {super();
+            this.catsStyle =
+                {
+                    padding: 10,
+                    margin: 5,
+                    backgroundColor: 'lightgrey',
+                    borderRadius: 10
+                };
+
+        }
         render(){
             console.log("Render component: ", this.constructor.name);
             let catList = this.props.cats.map( (val,k) =>  React.createElement('li', {key: k}, val) );
             let root =
-                <React.Fragment>
+                <div style={this.catsStyle}>
                     <h3>{this.props.title?this.props.title:"Library resources"}</h3>
                     <ol> {catList} </ol>
-                </React.Fragment>;
+                </div>;
 
             return root;
         }
