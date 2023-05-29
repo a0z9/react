@@ -9,9 +9,7 @@
 </head>
 <body>
 
->
 <div id="div6"></div>
-
 
 <script type="text/babel">
 // -------------- dynamic lists -------------
@@ -21,13 +19,20 @@
     class Cats extends React.Component //JSX component
     {
         cats = this.props.cats;
-        title = this.props.title;
+        title = this.props.title || "My Library list";
+        size = parseInt(this.props.fontSize) || 22;
 
-        state = {fontSize: 22};
+        state = {fontSize: this.size};
 
         onWheelHandler = (e) =>{
         if (e.nativeEvent.wheelDelta>0) this.setState({fontSize: this.state.fontSize + 1});
         if (e.nativeEvent.wheelDelta<0) this.setState({fontSize: this.state.fontSize - 1});
+        };
+
+        onInputNumberHandler = (e) =>{
+           const fs =  parseInt(e.target.value);
+           console.log("fontSize: ", fs);
+           this.setState({fontSize: fs});
         };
        initProps = () => {
            this.catsStyle =
@@ -44,12 +49,15 @@
             console.log("Render component: ", this.constructor.name);
             let catList = this.cats.map( (val,k) =>  React.createElement('li', {key: k}, val) );
             let root =
+                 <div>
+                     <input type="number" min="12" max="32" value={this.state.fontSize} onChange={this.onInputNumberHandler} style={{padding: 5, margin: 5}}/>
                 <div style={this.catsStyle} onWheel={this.onWheelHandler}>
                     <h3>{this.title?this.title:"Library resources"}</h3>
                     <ol> {catList} </ol>
                     //...
-                </div>;
+                </div>
 
+                  </div>;
             return root;
         }
 
