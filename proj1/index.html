@@ -87,6 +87,7 @@ ReactDOM.render(<MyList2 title="Мой новый список"/>,document.query
     {
         constructor({cats,title})
         {super();
+            console.log("Component " + this.constructor.name + " ctor called!");
             this.catsStyle =
                 {
                     padding: 10,
@@ -108,12 +109,59 @@ ReactDOM.render(<MyList2 title="Мой новый список"/>,document.query
 
             return root;
         }
+
+        componentDidMount(){
+            console.log("+++ Component " + this.constructor.name + " did mount!");
+        }
+
+        UNSAFE_componentWillMount(){
+            console.log("+++ Component " + this.constructor.name + " will mount!");
+        }
+
+        componentDidUpdate(){
+            console.log("+- Component " + this.constructor.name + " updated!");
+        }
+
+        componentWillUnmount(){
+            console.log("--- Component " + this.constructor.name + " unmounted!");
+        }
+
+
     }
 
     ReactDOM.render(<Cats cats={[...cats, 'Магнитные ленты']} title="Библиотечные ресурсы"/>,document.querySelector("#div6"));
 
+
+ const componentIsMounted = (id) =>
+ {
+     return document.getElementById(id).innerHTML.trim() !== "";
+ }
+
+ const mountComponent = (id) =>
+ {
+     if(!componentIsMounted(id))
+     ReactDOM.render(<Cats cats={[...cats, 'Магнитные ленты']} title="Библиотечные ресурсы"/>,document.getElementById(id));
+
+ }
+
+    const unmountComponent = (id) =>
+    {
+        if(componentIsMounted(id))
+        ReactDOM.unmountComponentAtNode(document.getElementById(id));
+
+    }
+
 </script>
 
+<button onclick="( () => {
+    console.log('try to delete....');
+    unmountComponent('div6');
+})()">Unmount Component</button>
+
+<button onclick="( () => {
+            console.log('try to create....');
+            mountComponent('div6');
+})()">Mount Component</button>
 
 
 </body>
