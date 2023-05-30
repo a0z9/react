@@ -37,6 +37,14 @@
 
   */
 
+const randomColor = () =>
+{
+    const list = '0123456789abcdef';
+    let color = '#';
+    for(let i=0; i<6; i++) color += list[Math.floor(Math.random()*16)];
+    return color;
+
+};
 
 const messages = [
     {id:123, fromUser:'Sand', toUser:'Ann', message:'Салют!'}, // -> Message
@@ -44,17 +52,27 @@ const messages = [
     {id:333, fromUser:'Ann', toUser:'Alex', message:'HowdoUdo!'}  // -> Message
 ];
 
-const Message = ({id,fromUser='me',toUser='All',text}) =>
+const Message = ({id,fromUser='me',toUser='All',text, color='lightgreen'}) =>
 {
+    const [data, processData] = React.useState({messageColor: color, metadata: "jlsaNHfdahrsjljks,fnlk"});
+
     let style = {
-        backgroundColor: 'lightgreen',
+        backgroundColor: data.messageColor,
         borderRadius: 7,
         margin: 5,
         padding: 5
     };
 
+    const clickHandler = (e) =>
+    {
+        console.log("message clicked: ", id, ", message", text)
+        console.log(data);
+        processData({...data, messageColor: randomColor()});
+
+    }
+
     return(
-        <div style={style}>
+        <div style={style} onClick={clickHandler}>
         <p>From:{fromUser}, To:{toUser} </p>
         <p>{text}</p>
         </div>
@@ -83,9 +101,8 @@ ReactDOM.render(
 ReactDOM.render(
     <ChatBox  title="LibChat from Server">
         {messages.map( (message, id) =>
-          <Message id={message.id} fromUser={message.fromUser} toUser={message.toUser} text={message.message}/>
+          <Message key={id} id={message.id} fromUser={message.fromUser} toUser={message.toUser} text={message.message} color={randomColor()}/>
            )
-
         }
     </ChatBox>, document.querySelector("#div4"));
 
