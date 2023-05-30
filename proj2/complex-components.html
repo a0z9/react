@@ -56,6 +56,13 @@ const Message = ({id,fromUser='me',toUser='All',text, color='lightgreen'}) =>
 {
     const [data, processData] = React.useState({messageColor: color, metadata: "jlsaNHfdahrsjljks,fnlk"});
 
+    React.useEffect(
+        () => {
+            console.log("Hook useEffect: " ,id,", data:", data);
+        },
+        [data.messageColor]
+    );
+
     let style = {
         backgroundColor: data.messageColor,
         borderRadius: 7,
