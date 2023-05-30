@@ -82,9 +82,12 @@ ReactDOM.render(
 
 ReactDOM.render(
     <ChatBox  title="LibChat from Server">
-        {}
-    </ChatBox>
-    ,document.querySelector("#div4"));
+        {messages.map( (message, id) =>
+          <Message id={message.id} fromUser={message.fromUser} toUser={message.toUser} text={message.message}/>
+           )
+
+        }
+    </ChatBox>, document.querySelector("#div4"));
 
  const Cats = ({cats,title}) => //JSX component
     {
