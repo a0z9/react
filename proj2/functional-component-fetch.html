@@ -66,8 +66,8 @@ const UserBox =()=>
     return(
         <div>
             <Users users={data.users} showSelected={showSelected}/>
-            <button onClick={getUsers}>Получить список</button>
-            <h3>{data.selected}</h3>
+            <button onClick={()=>getUsers()}>Получить список</button>
+            <h3>Selected UUID: {data.selected}</h3>
         </div>
     );
 }
