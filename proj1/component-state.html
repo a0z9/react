@@ -21,6 +21,9 @@
         cats = this.props.cats;
         title = this.props.title || "My Library list";
         size = parseInt(this.props.fontSize) || 22;
+        minFontSize = parseInt(this.props.minFontSize) || 10;
+        maxFontSize = parseInt(this.props.maxFontSize) || 42;
+
 
         state = {fontSize: this.size};
 
@@ -50,7 +53,7 @@
             let catList = this.cats.map( (val,k) =>  React.createElement('li', {key: k}, val) );
             let root =
                  <div>
-                     <input type="number" min="12" max="32" value={this.state.fontSize} onChange={this.onInputNumberHandler} style={{padding: 5, margin: 5}}/>
+                     <input type="number" min={this.minFontSize} max={this.maxFontSize} value={this.state.fontSize} onChange={this.onInputNumberHandler} style={{padding: 5, margin: 5}}/>
                 <div style={this.catsStyle} onWheel={this.onWheelHandler}>
                     <h3>{this.title?this.title:"Library resources"}</h3>
                     <ol> {catList} </ol>
@@ -59,6 +62,14 @@
 
                   </div>;
             return root;
+        }
+
+        shouldComponentUpdate(nextPr, nextSt)
+        {
+            ///
+            console.log("call shouldComponentUpdate: ",nextPr,nextSt);
+            if (nextSt.fontSize > this.maxFontSize || nextSt.fontSize < this.minFontSize) { console.log("check fontSize limits failed..."); return false;}
+            return true;
         }
 
         componentDidMount(){

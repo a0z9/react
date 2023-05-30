@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React Day1 training</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+</head>
+<body>
+
+<div id="div1"></div>
+<hr/>
+<div id="div2"></div>
+<div id="div3"></div>
+<hr/>
+<div id="div4"></div>
+<hr/>
+<div id="div5"></div>
+<hr/>
+<div id="div6"></div>
+
+
+<script type="text/babel">
+
+// -------------- dynamic lists -------------
+
+ let cats = ['Book', 'Журналы', 'Papers', 'Microfilms', 'Digitals', 'Manuscripts'];
+
+ /*
+ <ChatBox p1="", ...>
+   <Header p1="".../>
+   {messages} // -> <Message id="" importance="" />
+
+   <Footer/>
+ </ChatBox>
+
+  */
+
+
+const messages = [
+    {id:123, fromUser:'Sand', toUser:'Ann', message:'Салют!'}, // -> Message
+    {id:345, fromUser:'Sand', toUser:'All', message:'Салют всем!'}, // -> Message
+    {id:333, fromUser:'Ann', toUser:'Alex', message:'HowdoUdo!'}  // -> Message
+];
+
+const Message = ({id,fromUser='me',toUser='All',text}) =>
+{
+    let style = {
+        backgroundColor: 'lightgreen',
+        borderRadius: 7,
+        margin: 5,
+        padding: 5
+    };
+
+    return(
+        <div style={style}>
+        <p>From:{fromUser}, To:{toUser} </p>
+        <p>{text}</p>
+        </div>
+    );
+
+}
+
+ const ChatBox = ({children,title}) =>
+ {
+   return (
+     <div>
+         <h2>{title}</h2>
+         <div>{children}</div>
+     </div>
+   );
+ };
+
+
+ReactDOM.render(
+    <ChatBox  title="LibChat from cache">
+        <Message text="Hi!" />
+        <Message text="Нужна книга..  Bla-Bla-Book"/>
+    </ChatBox>
+        ,document.querySelector("#div2"));
+
+ReactDOM.render(
+    <ChatBox  title="LibChat from Server">
+        {}
+    </ChatBox>
+    ,document.querySelector("#div4"));
+
+ const Cats = ({cats,title}) => //JSX component
+    {
+           const catsStyle =
+                {
+                    padding: 10,
+                    margin: 5,
+                    backgroundColor: 'lightgrey',
+                    borderRadius: 20
+                };
+
+            console.log("Render functional component: ", Cats.name);
+            let catList = cats.map( (val,k) =>  React.createElement('li', {key: k}, val) );
+            let root =
+                <div style={catsStyle}>
+                    <h3>{title?title:"Library resources"}</h3>
+                    <ol> {catList} </ol>
+                </div>;
+
+            return root;
+
+    };
+
+    ReactDOM.render(<Cats cats={[...cats, 'Магнитные ленты']} title="Библиотечные ресурсы"/>,document.querySelector("#div1"));
+
+</script>
+
+
+
+</body>
+</html>
