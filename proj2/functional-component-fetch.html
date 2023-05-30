@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React Day1 training</title>
+    <link rel="stylesheet" href="css/basic.css">
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+</head>
+<body>
+
+<div id="div1"></div>
+<hr/>
+<div id="div2"></div>
+
+<script type="text/babel">
+
+// -------------- fetch dynamic lists and show -------------
+
+const Users = ({users}) =>{
+  const rows = users.map( (data) =>
+  <tr key={data.login.uuid}>
+      <td> {data.email} </td>
+      <td> {data.phone} </td>
+      <td> {data.location.city}</td>
+  </tr>);
+
+  return(
+    <table className="users">
+      <tbody>
+      {rows}
+      </tbody>
+   </table>
+  );
+};
+
+const UserBox =()=>
+{
+    const[data,setState] = React.useState({users:[]});
+    const  getUsers = () =>
+    {
+        fetch("https://api.randomuser.me/?nat=ES&results=15", {
+            method: "GET",
+            mode: 'cors',
+            headers: {'Content-Type': 'application/json'} })
+            .then(res => res.json())
+            .then( json => {
+                console.log(json.results);
+                setState({users:json.results});
+
+                        });
+    }
+
+    return(
+        <div>
+            <Users users={data.users} />
+            <button onClick={getUsers}>Получить список</button>
+        </div>
+    );
+}
+
+ReactDOM.render( <UserBox title="LibChat from Server"/>, document.querySelector("#div1"));
+
+</script>
+
+
+
+</body>
+</html>
