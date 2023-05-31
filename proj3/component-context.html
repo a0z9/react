@@ -56,12 +56,10 @@ const MenuBox = () =>
     setState({color:ctx.color});
 
     };
-
     const ctxHandler = () =>{
     setCtx({...ctx,color:randomColor()});
 
     };
-
 
     // const [ctx] = React.useContext(Ctx);
     const [ctx, setCtx] = React.useContext(Ctx);

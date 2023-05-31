@@ -1,0 +1,15 @@
+{
+  "name": "proj3-modules",
+  "version": "1.0.0",
+  "description": "trainig\u001b[Dn",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "modules"
+  ],
+  "type": "commonjs",
+  "author": "a0z9",
+  "license": "ISC"
+}
