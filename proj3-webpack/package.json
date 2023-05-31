@@ -11,7 +11,8 @@
     "watch": "webpack --watch",
     "serve": "webpack serve",
     "startw": "webpack --mode development --watch",
-    "start-ds": "webpack-dev-server --mode development --open --hot"
+    "start-ds": "webpack-dev-server --mode development --open --hot",
+    "start-ps": "webpack-dev-server --mode production --open --hot"
   },
   "author": "a0z9@rambler.ru",
   "license": "ISC",
