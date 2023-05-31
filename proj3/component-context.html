@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React Day3 training</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+    <link rel="stylesheet" href="css/basic.css">
+</head>
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+const randomColor = () =>
+{
+    const list = '0123456789abcdef';
+    let color = '#';
+    for(let i=0; i<6; i++) color += list[Math.floor(Math.random()*16)];
+    return color;
+
+};
+
+const Ctx = React.createContext();
+
+const App = () =>
+{
+    const [context, setState] = React.useState({color: "lightgreen", size: 24});
+    return (
+        <Ctx.Provider value={[context,setState]}>
+           <Menu />
+        </Ctx.Provider>
+    )
+
+};
+
+const Menu = () =>
+{
+    const [ctx] = React.useContext(Ctx);
+
+    return (
+        <div>
+        <div style={{backgroundColor: ctx.color,width:75, height:30, borderRadius:12, margin: 5}} />
+        <MenuBox />
+        </div>
+    )
+
+};
+
+
+const MenuBox = () =>
+{
+    const clickHandler = (e) => {
+    setState({color:ctx.color});
+
+    };
+
+    const ctxHandler = () =>{
+    setCtx({...ctx,color:randomColor()});
+
+    };
+
+
+    // const [ctx] = React.useContext(Ctx);
+    const [ctx, setCtx] = React.useContext(Ctx);
+    const [data,setState] = React.useState({color:'lightgrey'});
+
+    return (
+        <div>
+        <button onClick={clickHandler}>Press to use GLOBAL ctx </button>
+         <br/>
+         <button onClick={ctxHandler}>Press to change ctx </button>
+        <div style={{backgroundColor: data.color,width:75, height:30, borderRadius:12, margin: 5}} />
+        </div>
+    );
+
+};
+
+    ReactDOM.render(<App />,document.querySelector("#root"));
+
+</script>
+
+
+
+</body>
+</html>
