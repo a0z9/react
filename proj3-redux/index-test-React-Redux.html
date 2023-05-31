@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React Redux</title>
+  <script src="https://unpkg.com/react@18.1.0/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18.1.0/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/redux@4.2.0/dist/redux.min.js"></script>
+  <script src="https://unpkg.com/react-redux@7.2.9/dist/react-redux.min.js"></script>
+
+</head>
+<body>
+
+<div id="root"></div>
+<div id="root2"></div>
+
+<script>
+const log = console.log;
+
+const reducer = (state,action) =>
+{
+    let counter = state.counter;
+    switch (action.type)
+    {
+        case 'PLUS': counter++; break;
+        case 'MINUS': counter--; break;
+        case 'RESET': counter=0; break;
+        case 'DOUBLE': counter *= 2; break;
+        default:
+            log('type mismatch!!');
+            return {...state};
+    }
+    return {...state, counter: counter};
+}
+
+const init_state = {counter: 0};
+const store = Redux.createStore(reducer,init_state);
+log(store.getState());
+
+</script>
+
+
+<script type="text/babel">
+
+class Counter extends React.Component
+{
+    render() {
+    return (
+    <h2>Counter: {this.props.counter} </h2>
+    );
+    }
+}
+
+class Button  extends React.Component
+{
+    constructor(props)
+    {
+        super(props);
+        this.state = {counter:0};
+    }
+
+    onClick =() =>{
+        log('button clicked!');
+        this.setState(state => ({...state, counter: state.counter+1}));
+        if(typeof this.props.dispatchStore !== "undefined")
+        {this.props.dispatchStore(this.props.type);}
+
+    }
+
+    render() {
+        log(this.state,this.props.color);
+        return (
+            <div>
+                <button style={{color: this.props.color, margin: 5, padding: 5}} onClick={this.onClick}>
+                    Count: {this.state.counter} type: {this.props.type}
+                </button>
+            </div>
+        );
+    }
+
+};
+
+const mapState2Prop = (gstate) =>
+{
+    return {counter: gstate.counter};
+}
+
+const dispatch2props = (dispatch) =>
+{
+    return {dispatchStore: (data)=>dispatch({type:data})};
+}
+
+const GlobalCounter = ReactRedux.connect(mapState2Prop)(Counter)
+const Button1 = ReactRedux.connect(null,dispatch2props)(Button)
+
+const Provider = ReactRedux.Provider;
+
+ReactDOM.render(
+    <div>
+    <Provider store={store}>
+    <GlobalCounter />
+    <Button1 color='green' type='PLUS'/>
+    <Button1 color='red' type='MINUS'/>
+    <Button1 color='grey' type='RESET'/>
+    <Button1 color='lightblue' type='DOUBLE'/>
+    </Provider>
+    </div>,
+    document.getElementById('root'));
+</script>
+
+
+</body>
+</html>
